@@ -8,4 +8,11 @@ function hasNull(array $arr): bool {
     return false;
 }
 
+function toArrayOfRef(array $arr): array {
+    foreach ($arr as $key => $value){
+        $arr[$key] = &$value;
+    }
+    return $arr;
+}
+
 ?>

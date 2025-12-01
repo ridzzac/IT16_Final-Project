@@ -13,11 +13,10 @@ if(isset($_GET["person_page"]) && $_GET["person_page"] === true) {
     $selectPersonResult = $stmt->execute();
     if($selectPersonResult){
         $result = $stmt->get_result();
-        while($row = $result->fetch_assoc(MYSQLI_ASSOC)){
+        while($row = $result->fetch_assoc()){
             array_push($personPage, $row);
         }
     }
-    $stmt->close;
 }
 
 ?>

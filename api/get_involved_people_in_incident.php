@@ -13,8 +13,10 @@ if(isset($_GET["involved_people_page"]) && $_GET["involved_people_page"] === tru
     $stmtForIncident = $conn->prepare($queryForIncident);
     $stmtForIncident->bind_param("i", $incident_id);
     if($stmtForIncident->execute()) {
-        $involvedPeopleInIncident_IncidentInfo = $stmt->fetch_assoc();
+        $result = $stmtForIncident->get_result();
+        $involvedPeopleInIncident_IncidentInfo = $result->fetch_assoc();
     }
+    $stmtForIncident->close();
 
     // Select all people involved
     $queryForInvolvedPeople = "
@@ -35,10 +37,11 @@ if(isset($_GET["involved_people_page"]) && $_GET["involved_people_page"] === tru
     $stmtForInvolvedPeople = $conn->prepare($queryForInvolvedPeople);
     $stmtForInvolvedPeople->bind_param("i", $incident_id);
     if($stmtForInvolvedPeople->execute()) {
-        while($row = $stmtForInvolvedPeople->fetch_assoc()) {
+        $result = $stmtForInvolvedPeople->get_result();
+        while($row = $result->fetch_assoc()) {
             array_push($involvedPeopleInIncident_PeopleList, $row);
         }
     }
+    $stmtForInvolvedPeople->close();
 }
-
 ?>

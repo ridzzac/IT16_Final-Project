@@ -15,7 +15,7 @@ __Variables__:
         "last_name": "Sainz",
         "gender": "Male",
         "age": 31,
-        "date_of_birth": "1994-09-01"
+        "date_of_birth": "1994-09-01",
         "address": "Canduyong",
         "occupation": "Firefighter"
     ],
@@ -36,7 +36,7 @@ __Variables__:
 [
     [
         "incident_id": 5,
-        "title": "Bon Bakery Fire"
+        "title": "Bon Bakery Fire",
         "description": "The Bon Bakery was on fire because of a faulty oven.",
         "address": "Dapawan, Building #12",
         "date_of_incident": "2025-02-15",
@@ -52,4 +52,5 @@ __Variables__:
         ...
     ]
 ]
+
 ```

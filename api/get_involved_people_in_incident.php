@@ -21,18 +21,21 @@ if(isset($_GET["involved_people_page"]) && $_GET["involved_people_page"] === tru
     // Select all people involved
     $queryForInvolvedPeople = "
         SELECT
-            involvement_type.name,
-            person.first_name,
-            person.last_name,
-            person.date_of_birth,
-            gender.name,
-            odiongan_barangay.name,
-            person.sub_location
+            person.first_name AS 'first_name',
+            person.last_name AS 'last_name',
+            gender.name AS 'gender', 
+            involvement_type.name AS 'involvement_type',
+            TIMESTAMPDIFF(YEAR, incident.date_of_incident, person.date_of_birth) AS 'age_at_incident',
+            CONCAT_WS(', ', odiongan_barangay.name, person.sub_location) AS 'address',
+            involved_person.description AS 'description'
         FROM
-            person LEFT JOIN gender ON person.gender_id = gender.gender_id 
-            LEFT JOIN involvement_type ON involved_person.involvement_type_id = involvement_type.involvement_type_id
+            person INNER JOIN gender ON person.gender_id = gender.gender_id
+            INNER JOIN involved_person ON involved_person.person_id = person.person_id
+            INNER JOIN incident ON incident.incident_id = involved_person.incident_id
+            INNER JOIN involvement_type ON involvement_type.involvement_type_id = involved_person.involvement_type_id
+            INNER JOIN odiongan_barangay ON odiongan_barangay.odiongan_barangay_id = person.odiongan_barangay_id
         WHERE
-            involved_person.incident_id = ?
+            incident.incident_id = ?
     ";
     $stmtForInvolvedPeople = $conn->prepare($queryForInvolvedPeople);
     $stmtForInvolvedPeople->bind_param("i", $incident_id);

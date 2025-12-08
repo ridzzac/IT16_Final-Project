@@ -2,7 +2,7 @@
 
 require __DIR__ . "/../database_connection.php";
 
-$incidentsListResult = false;
+$isSuccess = false;
 $incidentsList = [];
 $limit = $_GET["limit"] ?? 20;
 $query = "
@@ -23,8 +23,8 @@ $query = "
 ";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $limit);
-$incidentsListResult = $stmt->execute();
-if($incidentsListResult){
+$isSuccess = $stmt->execute();
+if($isSuccess){
     $result = $stmt->get_result();
     while($row = $result->fetch_assoc()){
         array_push($incidentsList, $row);

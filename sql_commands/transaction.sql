@@ -19,7 +19,7 @@ INSERT INTO `audit_log`(`table_id`, `record_id`, `action_type`, `field_name`, `o
 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 -- Adding a `delete` record in the audit_log where a record from an entity table has been deleted
-INSERT INTO `audit_log` (`audit_log_id`, `record_id`, `action_type`, `user_id`, `timestamp`, `description`)
+INSERT INTO `audit_log` (`table_id`, `record_id`, `action_type`, `user_id`, `timestamp`, `description`)
 VALUES(?, ?, ?, ?, ?, ?);
 
 -- Updating a person. Needs to add an update record in the audit_log

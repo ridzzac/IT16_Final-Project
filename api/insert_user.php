@@ -2,6 +2,7 @@
 
 require __DIR__ . "/../database_connection.php";
 
+$isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $person_id = $_POST["person_id"];
     $username = $_POST["username"];
@@ -14,6 +15,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("iss", $person_id, $username, $hashedPassword);
-    $insertUserResult = $stmt->execute();
+    $isSuccess = $stmt->execute();
 }
 ?>

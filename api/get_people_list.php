@@ -3,7 +3,7 @@
 require __DIR__ . "/../database_connection.php";
 
 $peopleList = [];
-$peopleListResult = false;
+$isSuccess = false;
 $peopleListLimit = $_GET["limit"] ?? 20;
 $query = "
     SELECT
@@ -23,8 +23,8 @@ $query = "
 ";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $peopleListLimit);
-$peopleListResult = $stmt->execute();
-if($peopleListResult){
+$isSuccess = $stmt->execute();
+if($isSuccess){
     $result = $stmt->get_result();
     $count_id = 0;
     while($row = $result->fetch_assoc()){

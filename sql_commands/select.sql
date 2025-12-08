@@ -66,6 +66,17 @@ FROM
 WHERE
 	incident.incident_id = ?;
 
+-- Showing the users
+SELECT
+	system_user.user_id,
+    system_user.username,
+    CONCAT(person.first_name, " ", person.last_name) AS 'person_name',
+    system_user.created_at,
+    CASE WHEN system_user.is_admin = 1 THEN 'Yes' ELSE 'No' END AS 'Admin'
+FROM
+	system_user INNER JOIN person ON system_user.person_id = person.person_id;
+    
+
 -- Showing the audit log
 SELECT
 	audit_log.audit_log_id,

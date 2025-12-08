@@ -2,6 +2,7 @@
 
 require __DIR__ . "/../database_connection.php";
 
+$isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $person_id = $_POST["person_id"];
     $query = "
@@ -9,6 +10,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $person_id);
-    $deletePersonResult = $stmt->execute();
+    $isSuccess = $stmt->execute();
 }
 ?>

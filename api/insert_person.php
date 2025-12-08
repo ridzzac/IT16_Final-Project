@@ -2,6 +2,7 @@
 
 require __DIR__ . "/../database_connection.php";
 
+$isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $first_name = $_POST["first_name"];
     $middle_name = $_POST["middle_name"];
@@ -17,6 +18,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssssiis", $first_name, $middle_name, $last_name, $date_of_birth, $gender_id, $odiongan_barangay_id, $sub_location);
-    $insertPersonResult = $stmt->execute();
+    $isSuccess = $stmt->execute();
 }
 ?>

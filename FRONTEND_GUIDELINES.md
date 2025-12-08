@@ -28,7 +28,7 @@ __Variables__:
 ```
 
 ## Incidents List
-__Path__: `/api/get_people_list.php`<br>
+__Path__: `/api/get_incident_list.php`<br>
 __Variables__:
 - $incidentListResult - a boolean that indicates if the operation is successful or a failure.
 - $incidentList - an indexed array for each incident represented as an associative array. Below is an example:

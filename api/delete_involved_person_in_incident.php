@@ -2,6 +2,7 @@
 
 require __DIR__ . "/../database_connection.php";
 
+$isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $person_id = $_POST[$PERSON_ID];
     $forVariadic = [];
@@ -20,6 +21,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $forVariadic = toArrayOfRef($forVariadic);
     $stmt = $conn->prepare($query);
     $stmt->bind_param($types, $person_id, ... $forVariadic);
-    $deleteInvolvedPersonInIncident = $stmt->execute();
+    $isSuccess = $stmt->execute();
 }
 ?>

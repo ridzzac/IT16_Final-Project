@@ -3,6 +3,7 @@
 require __DIR__ . "/../database_connection.php";
 require __DIR__ . "/../constants.php";
 
+$isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $incident_id = $_POST["incident_id"];
     $person_id = $_POST["person_id"];
@@ -15,6 +16,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("iiis", $incident_id, $person_id, $involvement_type_id, $description);
-    $insertInvolvedPersonResult = $stmt->execute();
+    $isSuccess = $stmt->execute();
 }
 ?>

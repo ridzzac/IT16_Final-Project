@@ -3,7 +3,30 @@
 # API Endpoints
 Most endpoints have `$isSuccess` to indicate success of the operation. If it is `true` then it is successful, `false` if not and it means there was an error.
 Few endpoints have a specified is-success variable but they have the words "is success" to indicate that.
-## People List
+## Create Operations (Insert)
+### Insert Person
+Inserts a person to the database.<br>
+__Path__: `/api/insert_person.php`<br>
+__Post Body Required Keys__: `first_name`, `middle_name`, `last_name`, `date_of_birth`
+__Post Body Optional Keys__: `gender_id`, `odiongan_barangay_id`, `sub_location`
+
+### Insert Incident
+Inserts an incident to the database.<br>
+__Path__: `/api/insert_incident.php`<br>
+__Post Body Required Keys__: `title`, `odiongan_barangay_id`, `date_of_incident`, `date_investigation_started`
+__Post Body Optional Keys__: `description`, `sub_location`, `date_resolved`
+
+### Insert Involved Person
+Associates people to incidents.<br>
+__Post Body Required Keys__: `incident_id`, `person_id`, `involvement_type`
+__Post Body Optional Keys__: `description`
+
+### Create User Account
+Creates a new user account. The user should have an existing record of their personal information in the database.
+__Post Body Required Keys__: `person_id`, `username`, `password`
+
+## Read Operations (Select)
+### People List
 __Path__: `/api/get_people_list.php`<br>
 __Variables__:
 - $peopleList[] - an indexed array for each person represented as an associative array:
@@ -29,7 +52,7 @@ __Variables__:
 ]
 ```
 
-## Incidents List
+### Incidents List (Select)
 __Path__: `/api/get_incident_list.php`<br>
 __Variables__:
 - $incidentList[] - an indexed array for each incident represented as an associative array:
@@ -54,11 +77,11 @@ __Variables__:
 ]
 ```
 
-## Involved People List
+### Involved People List
 __Path__: `/api/get_involved_list.php`<br>
 __Variables__:
 - $involvedPeopleInIncident_IncidentInfo[] - an associative array containing information about the incident:
-```
+```php
 [
     "incident_id": 5,
     "title": "Bon Bakery Fire",
@@ -72,7 +95,7 @@ __Variables__:
 ]
 ```
 - $involvedPeopleInIncident_PeopleList[] - an indexed array for each individual person involved in the selected incident:
-```
+```php
 [
     [
         "first_name": "Carlos",
@@ -91,11 +114,11 @@ __Variables__:
 [
 ```
 
-## User List
+### User List
 __Path__: `/api/get_user_list.php`,
 __Variables__:
 - $userList[] - and indexed array for each individual users.
-```
+```php
 [
     [
         "user_id": 7,
@@ -111,3 +134,5 @@ __Variables__:
     ]
 ]
 ```
+
+##

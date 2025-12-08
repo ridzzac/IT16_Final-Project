@@ -12,13 +12,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $date_of_incident = $_POST["date_of_incident"];
     $date_investigation_started = $_POST["date_investigation_started"] ?? null;
     $date_resolved = $_POST["date_resolved"] ?? null;
+    $incident_status_id = $_POST["incident_status_id"] ?? 0;
 
     $query = "
-        INSERT INTO incident (title, description, odiongan_barangay_id, sub_location, date_of_incident, date_investigation_started, date_resolved)
-        VALUES(?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO incident (title, description, odiongan_barangay_id, sub_location, date_of_incident, date_investigation_started, date_resolved, incident_status_id)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?)
     ";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssissss", $title, $description, $odiongan_barangay_id, $sub_location, $date_of_incident, $date_investigation_started, $date_resolved);
+    $stmt->bind_param("ssissss", $title, $description, $odiongan_barangay_id, $sub_location, $date_of_incident, $date_investigation_started, $date_resolved, $incident_status_id);
     $isSuccess = $stmt->execute();
 }
 ?>

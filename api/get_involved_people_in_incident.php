@@ -2,23 +2,26 @@
 
 require __DIR__ . "/../database_connection.php";
 
+global $incident_id;
+
 $involvedPeopleInIncident_IncidentInfo = [];
 $involvedPeopleInIncident_PeopleList = [];
 
+if(!isset($incident_id) || !is_int($incident_id)){
+    $incident_id = 0;
+}
 
-$incident_id = $_GET["incident_id"];
-
-// Select Incident with the ID
+$isIncidentInfoSuccess = false;
 $queryForIncident = "SELECT * FROM incident WHERE incident_id = ?";
 $stmtForIncident = $conn->prepare($queryForIncident);
 $stmtForIncident->bind_param("i", $incident_id);
-if($stmtForIncident->execute()) {
+if($isIncidentInfoSuccess = $stmtForIncident->execute()) {
     $result = $stmtForIncident->get_result();
     $involvedPeopleInIncident_IncidentInfo = $result->fetch_assoc();
-    print_r($involvedPeopleInIncident_IncidentInfo);
+    $stmtForIncident->close();
 }
 
-// Select all people involved
+$isInvolvedPeopleSuccess = false;
 $queryForInvolvedPeople = "
     SELECT
         person.first_name AS 'first_name',
@@ -39,13 +42,12 @@ $queryForInvolvedPeople = "
 ";
 $stmtForInvolvedPeople = $conn->prepare($queryForInvolvedPeople);
 $stmtForInvolvedPeople->bind_param("i", $incident_id);
-if($stmtForInvolvedPeople->execute()) {
+if($isInvolvedPeopleSuccess = $stmtForInvolvedPeople->execute()) {
     $result = $stmtForInvolvedPeople->get_result();
     while($row = $result->fetch_assoc()) {
         array_push($involvedPeopleInIncident_PeopleList, $row);
     }
+    $stmtForInvolvedPeople->close();
 }
-$stmtForInvolvedPeople->close();
-$stmtForIncident->close();
 
 ?>

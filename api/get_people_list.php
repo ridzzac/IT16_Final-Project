@@ -15,7 +15,8 @@ $query = "
         TIMESTAMPDIFF(YEAR, person.date_of_birth, NOW()) as 'age',
         person.date_of_birth,
         CONCAT_WS(',', odiongan_barangay.name, person.sub_location) as 'address',
-        person.occupation
+        person.occupation,
+        person.face_image_file
     FROM
         person INNER JOIN gender ON person.gender_id = gender.gender_id
         INNER JOIN odiongan_barangay ON person.odiongan_barangay_id = odiongan_barangay.odiongan_barangay_id

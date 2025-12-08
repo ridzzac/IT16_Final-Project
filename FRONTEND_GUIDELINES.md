@@ -1,35 +1,34 @@
 # Front-end Guidelines
 
 # API Endpoints
-Most endpoints have `$isSuccess` to indicate success of the operation. If it is `true` then it is successful, `false` if not and it means there was an error.
-Few endpoints have a specified is-success variable but they have the words "is success" to indicate that.
+Except for [Involved People List endpoints](#Insert Involved Person) endpoint, all endpoints operations have `$isSuccess` boolean to indicate success of the operation. If it is `true` then it is successful, `false` if not and it means there was an error.
 ## Create Operations (Insert)
 ### Insert Person
 Inserts a person to the database.<br>
 __Path__: `/api/insert_person.php`<br>
-__Post Body Required Keys__: `first_name`, `middle_name`, `last_name`, `date_of_birth`
+__Post Body Required Keys__: `first_name`, `middle_name`, `last_name`, `date_of_birth`<br>
 __Post Body Optional Keys__: `gender_id`, `odiongan_barangay_id`, `sub_location`
 
 ### Insert Incident
 Inserts an incident to the database.<br>
 __Path__: `/api/insert_incident.php`<br>
-__Post Body Required Keys__: `title`, `odiongan_barangay_id`, `date_of_incident`, `date_investigation_started`
+__Post Body Required Keys__: `title`, `odiongan_barangay_id`, `date_of_incident`, `date_investigation_started`<br>
 __Post Body Optional Keys__: `description`, `sub_location`, `date_resolved`
 
 ### Insert Involved Person
 Associates people to incidents.<br>
-__Post Body Required Keys__: `incident_id`, `person_id`, `involvement_type`
+__Post Body Required Keys__: `incident_id`, `person_id`, `involvement_type`<br>
 __Post Body Optional Keys__: `description`
 
 ### Create User Account
-Creates a new user account. The user should have an existing record of their personal information in the database.
+Creates a new user account. The user should have an existing record of their personal information in the database.<br>
 __Post Body Required Keys__: `person_id`, `username`, `password`
 
 ## Read Operations (Select)
 ### People List
 __Path__: `/api/get_people_list.php`<br>
 __Variables__:
-- $peopleList[] - an indexed array for each person represented as an associative array:
+- `$peopleList[]` - an indexed array for each person represented as an associative array:
 ```php
 [
     [
@@ -52,10 +51,10 @@ __Variables__:
 ]
 ```
 
-### Incidents List (Select)
+### Incidents List
 __Path__: `/api/get_incident_list.php`<br>
 __Variables__:
-- $incidentList[] - an indexed array for each incident represented as an associative array:
+- `$incidentList[]` - an indexed array for each incident represented as an associative array:
 ```php
 [
     [
@@ -80,7 +79,8 @@ __Variables__:
 ### Involved People List
 __Path__: `/api/get_involved_list.php`<br>
 __Variables__:
-- $involvedPeopleInIncident_IncidentInfo[] - an associative array containing information about the incident:
+- `$isIncidentInfoSuccess` - a boolean datatype that determines if the retrieval of the incident's information is successful.
+- `$involvedPeopleInIncident_IncidentInfo[]` - an associative array containing information about the incident:
 ```php
 [
     "incident_id": 5,
@@ -94,7 +94,8 @@ __Variables__:
     "status": "Not Started"
 ]
 ```
-- $involvedPeopleInIncident_PeopleList[] - an indexed array for each individual person involved in the selected incident:
+- `$isInvolvedPeopleSuccess` - a boolean value that determines if the retrieval of the list of the people involved is successful.
+- `$involvedPeopleInIncident_PeopleList[]` - an indexed array for each individual person involved in the selected incident:
 ```php
 [
     [
@@ -117,7 +118,7 @@ __Variables__:
 ### User List
 __Path__: `/api/get_user_list.php`,
 __Variables__:
-- $userList[] - and indexed array for each individual users.
+- `$userList[]` - and indexed array for each individual users.
 ```php
 [
     [
@@ -135,4 +136,19 @@ __Variables__:
 ]
 ```
 
-##
+## Update Operations
+### Update Username
+Updates a user's username.<br>
+__Path__: `/api/update_user_username.php`<br>
+__Post Body Required Keys__: `user_id`, `username`
+
+### Upload Person's Face
+Uploads a person's face into the database.<br>
+__Path__: `/api/upload_person_face.php`<br>
+__Post Body Required Keys__: `uploadedFile`, `person_id`
+
+## Delete Operations
+### Delete User
+Deletes a user from the dataabase.<br>
+__Path__: `/api/delete_user.php`<br>
+__Post Body Required Keys__: `user_id`

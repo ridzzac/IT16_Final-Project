@@ -153,6 +153,18 @@ Deletes a user from the dataabase.<br>
 __Path__: `/api/delete_user.php`<br>
 __Post Body Required Keys__: `user_id`
 
+# User Authentication
+__Path__: `/api/authenticate_user.php`<br>
+__Post Body Required Keys__: `username`, `password`
+
+To keep the user from going to a page directly without logging in, you must include this code snippet above your PHP page.
+```php
+session_start();
+
+if(!isset($_SESSION["logged_in"]) || $_SESSION["logged_in"] !== true)
+    header("Location: login.php");
+```
+
 # Lookup Table Values
 ## Gender
 - [0] Unspecified
@@ -202,3 +214,4 @@ __Post Body Required Keys__: `user_id`
 - [21] Tabing Dagat
 - [22] Tabobo-an
 - [23] Tuburan
+

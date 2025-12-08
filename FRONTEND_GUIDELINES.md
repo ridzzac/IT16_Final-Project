@@ -13,7 +13,7 @@ __Post Body Optional Keys__: `gender_id`, `odiongan_barangay_id`, `sub_location`
 Inserts an incident to the database.<br>
 __Path__: `/api/insert_incident.php`<br>
 __Post Body Required Keys__: `title`, `odiongan_barangay_id`, `date_of_incident`, `date_investigation_started`<br>
-__Post Body Optional Keys__: `description`, `sub_location`, `date_resolved`
+__Post Body Optional Keys__: `description`, `sub_location`, `date_resolved`, `incident_status_id`
 
 ### Insert Involved Person
 Associates people to incidents.<br>
@@ -152,6 +152,7 @@ __Post Body Required Keys__: `uploadedFile`, `person_id`
 Deletes a user from the dataabase.<br>
 __Path__: `/api/delete_user.php`<br>
 __Post Body Required Keys__: `user_id`
+
 
 
 

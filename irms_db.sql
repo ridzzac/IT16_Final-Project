@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2025 at 04:01 PM
+-- Generation Time: Dec 08, 2025 at 11:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,58 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `irms_db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `audit_log`
---
-
-CREATE TABLE `audit_log` (
-  `audit_log_id` int(10) UNSIGNED NOT NULL,
-  `entity_table_id` int(10) UNSIGNED NOT NULL,
-  `record_id` int(11) NOT NULL,
-  `action_type` enum('INSERT','DELETE','UPDATE','') NOT NULL,
-  `field_name` varchar(20) DEFAULT NULL,
-  `old_value` varchar(100) DEFAULT NULL,
-  `new_value` varchar(100) DEFAULT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `description` tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `audit_log`
---
-
-INSERT INTO `audit_log` (`audit_log_id`, `entity_table_id`, `record_id`, `action_type`, `field_name`, `old_value`, `new_value`, `user_id`, `timestamp`, `description`) VALUES
-(1, 4, 10, 'DELETE', NULL, 'person_id: 11, incident_id: 5, involvement_type: 1', NULL, 0, '2025-12-03 18:39:24', 'Testing purposes'),
-(2, 4, 10, 'DELETE', NULL, 'person_id: 11, incident_id: 5, involvement_type: 1', NULL, 0, '2025-12-03 18:40:21', 'Testing purposes');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `entity_table`
---
-
-CREATE TABLE `entity_table` (
-  `entity_table_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `entity_table`
---
-
-INSERT INTO `entity_table` (`entity_table_id`, `name`) VALUES
-(1, 'gender'),
-(2, 'incident'),
-(3, 'incident_status'),
-(4, 'involved_person'),
-(5, 'involvement_type'),
-(6, 'odiongan_barangay'),
-(7, 'person'),
-(8, 'system_user');
 
 -- --------------------------------------------------------
 
@@ -247,22 +195,23 @@ CREATE TABLE `person` (
   `gender_id` int(10) UNSIGNED NOT NULL DEFAULT 5,
   `odiongan_barangay_id` int(10) UNSIGNED NOT NULL,
   `sub_location` varchar(100) DEFAULT NULL,
-  `occupation` varchar(100) DEFAULT NULL
+  `occupation` varchar(100) DEFAULT NULL,
+  `face_image_file` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `person`
 --
 
-INSERT INTO `person` (`person_id`, `first_name`, `middle_name`, `last_name`, `date_of_birth`, `gender_id`, `odiongan_barangay_id`, `sub_location`, `occupation`) VALUES
-(7, 'Carlos', 'de Castro', 'Sainz', '1994-09-01', 1, 6, NULL, 'Firefighter'),
-(11, 'Charles', 'Perceval', 'Leclerc', '1997-10-16', 1, 13, NULL, 'Convenience Store Manager'),
-(12, 'Max', 'Emilian', 'Verstappen', '1997-09-30', 1, 3, NULL, 'Professor'),
-(13, 'Oscar', 'Jack', 'Piastri', '2001-04-06', 1, 12, NULL, 'Policeman'),
-(14, 'Alexander', 'Philippe', 'Albon', '1996-03-23', 1, 15, NULL, 'Property Insurance Claims Adjuster'),
-(15, 'Isack', 'Alexandre', 'Hadjar', '2004-09-28', 1, 9, NULL, 'Vehicle Insurance Claims Adjuster'),
-(16, 'Erica', 'Makaluma', 'Basilio', '2003-08-01', 2, 7, NULL, 'Baker/Bakery Manager'),
-(17, 'Kyla', 'Ng', 'Corpuz', '1995-03-10', 2, 7, NULL, 'Baker');
+INSERT INTO `person` (`person_id`, `first_name`, `middle_name`, `last_name`, `date_of_birth`, `gender_id`, `odiongan_barangay_id`, `sub_location`, `occupation`, `face_image_file`) VALUES
+(7, 'Carlos', 'de Castro', 'Sainz', '1994-09-01', 1, 6, NULL, 'Firefighter', '../uploads/6936e36fb07181.13209865.jpg'),
+(11, 'Charles', 'Perceval', 'Leclerc', '1997-10-16', 1, 13, NULL, 'Convenience Store Manager', ''),
+(12, 'Max', 'Emilian', 'Verstappen', '1997-09-30', 1, 3, NULL, 'Professor', ''),
+(13, 'Oscar', 'Jack', 'Piastri', '2001-04-06', 1, 12, NULL, 'Policeman', ''),
+(14, 'Alexander', 'Philippe', 'Albon', '1996-03-23', 1, 15, NULL, 'Property Insurance Claims Adjuster', ''),
+(15, 'Isack', 'Alexandre', 'Hadjar', '2004-09-28', 1, 9, NULL, 'Vehicle Insurance Claims Adjuster', ''),
+(16, 'Erica', 'Makaluma', 'Basilio', '2003-08-01', 2, 7, NULL, 'Baker/Bakery Manager', ''),
+(17, 'Kyla', 'Ng', 'Corpuz', '1995-03-10', 2, 7, NULL, 'Baker', '');
 
 -- --------------------------------------------------------
 
@@ -289,19 +238,6 @@ INSERT INTO `system_user` (`user_id`, `person_id`, `username`, `password`, `crea
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `audit_log`
---
-ALTER TABLE `audit_log`
-  ADD PRIMARY KEY (`audit_log_id`),
-  ADD KEY `table_id` (`entity_table_id`);
-
---
--- Indexes for table `entity_table`
---
-ALTER TABLE `entity_table`
-  ADD PRIMARY KEY (`entity_table_id`);
 
 --
 -- Indexes for table `gender`
@@ -365,18 +301,6 @@ ALTER TABLE `system_user`
 --
 
 --
--- AUTO_INCREMENT for table `audit_log`
---
-ALTER TABLE `audit_log`
-  MODIFY `audit_log_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `entity_table`
---
-ALTER TABLE `entity_table`
-  MODIFY `entity_table_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT for table `gender`
 --
 ALTER TABLE `gender`
@@ -421,12 +345,6 @@ ALTER TABLE `person`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `audit_log`
---
-ALTER TABLE `audit_log`
-  ADD CONSTRAINT `audit_log_ibfk_1` FOREIGN KEY (`entity_table_id`) REFERENCES `entity_table` (`entity_table_id`);
 
 --
 -- Constraints for table `incident`

@@ -153,6 +153,52 @@ Deletes a user from the dataabase.<br>
 __Path__: `/api/delete_user.php`<br>
 __Post Body Required Keys__: `user_id`
 
+# Lookup Table Values
+## Gender
+- [0] Unspecified
+- [1] Male
+- [2] Female
+- [3] Transgender
+- [4] Other
 
+## Incident Status
+- [0] None
+- [1] Not Started
+- [2] Ongoing
+- [3] Resolved
+- [4] Cancelled
+- [5] On Hold
 
+## Involvement Type
+- [0] Pariticipant
+- [1] Reporter
+- [2] Affected
+- [3] Responsible
+- [4] Witness
+- [5] Handler
 
+## Odiongan Barangays
+- [0] Unknown Odiongan Barangay
+- [1] Amatong
+- [2] Anahao
+- [3] Bangon
+- [4] Batiano
+- [5] Budiong
+- [6] Canduyong
+- [7] Dapawan
+- [8] Gabawan
+- [9] Libertad
+- [10] Ligaya
+- [11] Liwanag
+- [12] Liwayway
+- [13] Malilico
+- [14] Mayha
+- [15] Panique
+- [16] Pato-o
+- [17] Poctoy
+- [18] Progreso Este
+- [19] Progreso Weste
+- [20] Rizal
+- [21] Tabing Dagat
+- [22] Tabobo-an
+- [23] Tuburan

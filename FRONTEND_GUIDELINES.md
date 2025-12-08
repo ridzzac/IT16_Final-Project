@@ -1,7 +1,7 @@
 # Front-end Guidelines
 
 # API Endpoints
-Except for `[Involved People List endpoints](#Insert Involved Person)` endpoint, all endpoints operations have `$isSuccess` boolean to indicate success of the operation. If it is `true` then it is successful, `false` if not and it means there was an error.
+Except for [Involved People List endpoints](#involved-people-list) endpoint, all endpoints operations have `$isSuccess` boolean to indicate success of the operation. If it is `true` then it is successful, `false` if not and it means there was an error.
 ## Create Operations (Insert)
 ### Insert Person
 Inserts a person to the database.<br>
@@ -152,4 +152,5 @@ __Post Body Required Keys__: `uploadedFile`, `person_id`
 Deletes a user from the dataabase.<br>
 __Path__: `/api/delete_user.php`<br>
 __Post Body Required Keys__: `user_id`
+
 

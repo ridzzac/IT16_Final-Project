@@ -11,13 +11,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $gender_id = $_POST["gender_id"] ?? 0;
     $odiongan_barangay_id = $_POST["odiongan_barangay_id"] ?? 0;
     $sub_location = $_POST["sub_location"];
+    $occupation = $_POST["occupation"];
 
     $query = "
-        INSERT INTO person (first_name, middle_name, last_name, date_of_birth, gender_id, odiongan_barangay_id, sub_location)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO person (first_name, middle_name, last_name, date_of_birth, gender_id, odiongan_barangay_id, sub_location, occupation)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssiis", $first_name, $middle_name, $last_name, $date_of_birth, $gender_id, $odiongan_barangay_id, $sub_location);
+    $stmt->bind_param("ssssiiss", $first_name, $middle_name, $last_name, $date_of_birth, $gender_id, $odiongan_barangay_id, $sub_location, $occupation);
     $isSuccess = $stmt->execute();
+    header("Location: ../page/index.php?table=person");
 }
 ?>

@@ -1,7 +1,6 @@
 <?php
 
 require __DIR__ . "/../database_connection.php";
-require __DIR__ . "/../constants.php";
 
 $isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -19,7 +18,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         VALUES(?, ?, ?, ?, ?, ?, ?, ?)
     ";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssissss", $title, $description, $odiongan_barangay_id, $sub_location, $date_of_incident, $date_investigation_started, $date_resolved, $incident_status_id);
+    $stmt->bind_param("ssissssi", $title, $description, $odiongan_barangay_id, $sub_location, $date_of_incident, $date_investigation_started, $date_resolved, $incident_status_id);
     $isSuccess = $stmt->execute();
+    header("Location: ../page/index.php?table=incident");   
 }
 ?>

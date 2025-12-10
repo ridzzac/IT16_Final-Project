@@ -3,10 +3,14 @@ require __DIR__ . "/../database_connection.php";
 
 session_start();
 
+const SESSION_LOGIN_ERROR = "login_error";
+const SESSION_LOGGED_IN = "logged_in";
+const SESSION_USERNAME = "username";
+
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     if(!isset($_POST["username"]) || !isset($_POST["password"])){
-        $_SESSION["login_error"] = "Enter username and password!";
-        header("Location: ../public/login.php");
+        $_SESSION[SESSION_LOGIN_ERROR] = "Enter username and password!";
+        header("Location: ../page/login.php");
         exit;
     }
     $isLoginSuccess = false;
@@ -20,19 +24,25 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $user_info = $result->fetch_assoc();
         $hashed_password = $user_info["password"];
         if(password_verify($input_password, $hashed_password)){
-            $_SESSION["username"] = $user_info["username"];
-            $_SESSION["logged_in"] = true;
+            $_SESSION[SESSION_USERNAME] = $user_info["username"];
+            $_SESSION[SESSION_LOGGED_IN] = true;
             $isLoginSuccess = true;
         }
     }
     if($isLoginSuccess) {
-        header("Location: ../public/dashboard.php");
+        header("Location: ../page/index.php");
         exit;
     }
     else{
-        $_SESSION["login_error"] = "Invalid username or password.";
-        header("Location: ../public/login.php");
+        $_SESSION[SESSION_LOGIN_ERROR] = "Invalid username or password.";
+        header("Location: ../page/login.php");
         exit;
     }
 }
+
+function isUserLoggedIn(): bool {
+    return isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true;
+}
+
+
 ?>

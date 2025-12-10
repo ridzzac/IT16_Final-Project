@@ -23,7 +23,6 @@ require __DIR__."/../api/get_involved_people_in_incident.php";
         print_r($involvedPeopleInIncident_IncidentInfo);
         foreach($involvedPeopleInIncident_IncidentInfo as $value):
     ?>
-        <p><?= htmlspecialchars(($)) ?></p>
     <?php endforeach ?>
     <table>
         <thead>

@@ -16,6 +16,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare($query);
     $stmt->bind_param("si", $username, $user_id);
     $isSuccess = $stmt->execute();
+
+    header("Location: ../page/index.php?table=user");
 }
 
 ?>

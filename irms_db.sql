@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2025 at 11:43 PM
+-- Generation Time: Dec 11, 2025 at 03:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,7 +67,9 @@ CREATE TABLE `incident` (
 --
 
 INSERT INTO `incident` (`incident_id`, `title`, `description`, `odiongan_barangay_id`, `sub_location`, `date_of_incident`, `date_reported`, `date_investigation_started`, `date_resolved`, `incident_status_id`) VALUES
-(5, 'Bon Bakery Fire', 'The Bon Bakery was on fire because of a faulty oven.', 7, 'Building #12', '2025-02-15', '2025-02-15', '2025-03-15', '2025-04-15', 1);
+(5, 'Bon Bakery Fire', 'The Bon Bakery was on fire because of a faulty oven.', 2, 'Building #12', '2025-02-15', '2025-02-15', '2025-03-15', '2025-04-15', 2),
+(7, 'Hala', 'away', 2, 'Court', '2025-12-11', '2025-12-11', '2025-12-11', '2025-12-11', 0),
+(8, 'Oh my Gah', 'hello', 0, '', '0000-00-00', '2025-12-11', '0000-00-00', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -111,7 +113,9 @@ CREATE TABLE `involved_person` (
 --
 
 INSERT INTO `involved_person` (`involved_person_id`, `person_id`, `incident_id`, `involvement_type_id`, `description`) VALUES
-(1, 7, 5, 5, '');
+(1, 7, 5, 5, ''),
+(2, 18, 5, 2, 'Cry'),
+(3, 17, 5, 1, 'Nagreport');
 
 -- --------------------------------------------------------
 
@@ -204,14 +208,22 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`person_id`, `first_name`, `middle_name`, `last_name`, `date_of_birth`, `gender_id`, `odiongan_barangay_id`, `sub_location`, `occupation`, `face_image_file`) VALUES
-(7, 'Carlos', 'de Castro', 'Sainz', '1994-09-01', 1, 6, NULL, 'Firefighter', '../uploads/6936e36fb07181.13209865.jpg'),
+(7, 'Carlos', 'Herve', 'Sainz', '2003-08-17', 1, 3, 'Sitio Sikat-Araw', 'Student', '../../uploads/693ad45b39d917.93640634.jpg'),
 (11, 'Charles', 'Perceval', 'Leclerc', '1997-10-16', 1, 13, NULL, 'Convenience Store Manager', ''),
 (12, 'Max', 'Emilian', 'Verstappen', '1997-09-30', 1, 3, NULL, 'Professor', ''),
 (13, 'Oscar', 'Jack', 'Piastri', '2001-04-06', 1, 12, NULL, 'Policeman', ''),
 (14, 'Alexander', 'Philippe', 'Albon', '1996-03-23', 1, 15, NULL, 'Property Insurance Claims Adjuster', ''),
 (15, 'Isack', 'Alexandre', 'Hadjar', '2004-09-28', 1, 9, NULL, 'Vehicle Insurance Claims Adjuster', ''),
 (16, 'Erica', 'Makaluma', 'Basilio', '2003-08-01', 2, 7, NULL, 'Baker/Bakery Manager', ''),
-(17, 'Kyla', 'Ng', 'Corpuz', '1995-03-10', 2, 7, NULL, 'Baker', '');
+(17, 'Kyla', 'Ng', 'Corpuz', '1995-03-10', 2, 7, NULL, 'Baker', ''),
+(18, 'Ridz', 'Coloma', 'Soriano', '2003-08-17', 0, 1, 'House #1', 'Student', ''),
+(19, 'Rfael', 'Coloma', 'Soriano', '2025-12-01', 0, 0, 'Court', 'Student', ''),
+(20, 'Liam', 'Carlson', 'Liam Lawson', '2003-02-01', 0, 0, 'House #95', 'Student', ''),
+(21, 'Liam', 'Carlson', 'Liam Lawson', '2003-02-01', 0, 0, 'House #95', 'Student', ''),
+(22, 'Liam', 'Carlson', 'Liam Lawson', '2003-02-01', 0, 0, 'House #95', 'Student', ''),
+(23, 'Liam', 'Carlson', 'Liam Lawson', '2003-02-01', 0, 0, 'House #95', 'Student', ''),
+(24, 'Liam', '', 'Lawson', '0000-00-00', 0, 0, '', '', ''),
+(25, 'Liam', '', 'Lawson', '0000-00-00', 0, 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -233,7 +245,8 @@ CREATE TABLE `system_user` (
 --
 
 INSERT INTO `system_user` (`user_id`, `person_id`, `username`, `password`, `created_at`, `is_admin`) VALUES
-(0, 7, 'Smooth Operator', '$2y$12$qFgoG3hUo5HGg2HHnTtcje3WpHWs4sKqpksn3ahF5YupKhkZcQBqG', '2025-11-30', 0);
+(1, 7, 'Smooth Operator', '$2y$12$qFgoG3hUo5HGg2HHnTtcje3WpHWs4sKqpksn3ahF5YupKhkZcQBqG', '2025-11-30', 0),
+(2, 17, 'Ridz Ridz', '$2y$12$FyNdATyg5ByYKLAmCxxzTedzMsyovf/w/5YBbm1B3dNJf2ywW6ULq', '2025-12-11', 0);
 
 --
 -- Indexes for dumped tables
@@ -310,7 +323,7 @@ ALTER TABLE `gender`
 -- AUTO_INCREMENT for table `incident`
 --
 ALTER TABLE `incident`
-  MODIFY `incident_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `incident_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `incident_status`
@@ -322,7 +335,7 @@ ALTER TABLE `incident_status`
 -- AUTO_INCREMENT for table `involved_person`
 --
 ALTER TABLE `involved_person`
-  MODIFY `involved_person_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `involved_person_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `involvement_type`
@@ -340,7 +353,13 @@ ALTER TABLE `odiongan_barangay`
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `person_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `person_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `system_user`
+--
+ALTER TABLE `system_user`
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

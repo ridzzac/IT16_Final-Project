@@ -9,11 +9,13 @@ $query = "
     SELECT
         system_user.user_id,
         system_user.username,
+        person.face_image_file,
         CONCAT(person.first_name, ' ', person.last_name) AS 'person_name',
         system_user.created_at,
         CASE WHEN system_user.is_admin = 1 THEN 'Yes' ELSE 'No' END AS 'is_admin'
     FROM
         system_user INNER JOIN person ON system_user.person_id = person.person_id
+    ORDER BY system_user.user_id ASC
     LIMIT ?
 ";
 

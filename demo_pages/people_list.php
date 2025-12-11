@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <?php 
-                require __DIR__."/../api/get_people_list.php";
+                require __DIR__."/../api/get_people_table.php";
                 foreach ($peopleList as $person): 
             ?>
                 <tr>

@@ -19,6 +19,7 @@ $query = "
     FROM
         incident INNER JOIN incident_status ON incident.incident_status_id = incident_status.incident_status_id
         INNER JOIN odiongan_barangay ON odiongan_barangay.odiongan_barangay_id = incident.odiongan_barangay_id
+    ORDER BY incident.incident_id ASC
     LIMIT ?
 ";
 $stmt = $conn->prepare($query);

@@ -20,6 +20,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssissssi", $title, $description, $odiongan_barangay_id, $sub_location, $date_of_incident, $date_investigation_started, $date_resolved, $incident_status_id);
     $isSuccess = $stmt->execute();
-    header("Location: ../page/index.php?table=incident");   
+    header("Location: ../page/index.php?display=incidents_table");   
 }
 ?>

@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $fileExtension = pathinfo($_FILES["uploadedFile"]["name"], PATHINFO_EXTENSION);
     $fileDestination = UPLOADS_DIR . uniqid('', true) . '.' . $fileExtension;
     $isUploadSuccess = move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $fileDestination);
-
+    error_log("isUploadSuccess: $isUploadSuccess");
     if(!$isUploadSuccess)
         exit;
 
@@ -21,6 +21,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $conn->prepare($query);
     $stmt->bind_param("si", $fileDestination, $person_id);
     $isSuccess = $stmt->execute();
+    error_log("isSuccess: $isSuccess");
 }
 
 ?>

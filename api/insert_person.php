@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . "/../database_connection.php";
+require __DIR__ . "/internal/handle_profile_image.php";
 
 $isSuccess = false;
 if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -19,7 +20,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     ";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ssssiiss", $first_name, $middle_name, $last_name, $date_of_birth, $gender_id, $odiongan_barangay_id, $sub_location, $occupation);
-    $isSuccess = $stmt->execute();
-    header("Location: ../page/index.php?table=person");
+    $isInsertSuccess = $stmt->execute();
+
+    error_log(print_r($_FILES, true));
+    if($_FILES["profile_image"]["error"] != UPLOAD_ERR_OK) {
+        header("Location: ../page/index.php?display=people_table"); 
+        exit;
+    }
+
+    $isSuccess = $isInsertSuccess && uploadProfileImage($conn, $_FILES["profile_image"]["tmp_name"], $_FILES["profile_image"]["name"], $conn->insert_id);
+    header("Location: ../page/index.php?display=people_table"); 
 }
 ?>

@@ -8,7 +8,7 @@
             <button>Save</button>
         </form>
         <form method="get">
-            <input type="hidden" name="table" value="user">
+            <input type="hidden" name="display" value="user">
             <button>Cancel</button>
         </form>
     </div>

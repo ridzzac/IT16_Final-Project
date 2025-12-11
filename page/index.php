@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . "/../api/authenticate_user.php";
 
-if(isset($_GET["table"]) && !in_array($_GET["table"], ["dashboard", "incidents", "people", "user"]))
+if(isset($_GET["display"]) && !in_array($_GET["display"], ["dashboard", "incidents_table", "people_table", "users_table", "incident_view"]))
     header("Location: index.php");
 ?>
 
@@ -29,26 +29,26 @@ if(isset($_GET["table"]) && !in_array($_GET["table"], ["dashboard", "incidents",
             <nav>
                 <div>
                     <form method="get" action="index.php">
-                        <input type="hidden" name="table" value="dashboard">
+                        <input type="hidden" name="display" value="dashboard">
                         <button>Dashboard</button>
                     </form>
                 </div>
                 <div>
                     <form method="get" action="index.php">
-                        <input type="hidden" name="table" value="people">
+                        <input type="hidden" name="display" value="people_table">
                         <button>People</button>
                     </form>
                 </div>
                 <div>
                     <form method="get" action="index.php">
-                        <input type="hidden" name="table" value="incidents">
+                        <input type="hidden" name="display" value="incidents_table">
                         <button>Incidents</button>
                     </form>
                 </div>
                 <div>
                     <?php if(isUserLoggedIn()): ?>
                     <form method="get" action="index.php">
-                        <input type="hidden" name="table" value="user">
+                        <input type="hidden" name="display" value="users_table">
                         <button>User</button>
                     </form>
                     <?php endif ?>
@@ -70,16 +70,16 @@ if(isset($_GET["table"]) && !in_array($_GET["table"], ["dashboard", "incidents",
         
         <main>
             <?php   
-                if(isset($_GET["table"]) && $_GET["table"] === "people")
-                    include __DIR__ . "/subpage/people_list.php";
-                else if(isset($_GET["table"]) && $_GET["table"] === "incidents"){
-                    if(isset($GET["incident_id"]) && is_int($_GET["incident_id"]))   
-                        include __DIR__ . "/subpage/incident_view.php";
-                    else
-                        include __DIR__ . "/subpage/incidents_list.php";
+                if(isset($_GET["display"])){
+                    $subpage = __DIR__ . match($_GET["display"]){
+                        "dashboard" => "/subpage/dashboard.php",
+                        "people_table" => "/subpage/people_table.php",
+                        "incidents_table" => "/subpage/incidents_table.php",
+                        "users_table" => "/subpage/users_table.php",
+                        "incident_view"=> "/subpage/incident_view.php"
+                    };
+                    include $subpage;
                 }
-                else if(isset($_GET["table"]) && $_GET["table"] === "user")
-                    include __DIR__ . "/subpage/user_list.php";
                 else
                     include __DIR__ . "/subpage/dashboard.php";
             ?>

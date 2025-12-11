@@ -1,7 +1,7 @@
 <div class="modal_overlay">
     <div class="modal_content">
         <h1>Insert Person</h1>
-        <form method="post" action="../../api/insert_person.php">
+        <form method="post" action="../../api/insert_person.php" enctype="multipart/form-data">
             <label for="input_first_name">First Name</label>
             <input id="input_first_name" name="first_name">
             <br>
@@ -56,12 +56,12 @@
             <label for="input_occupation">Occupation</label>
             <input id="input_occupation" name="occupation">
             <br>
-            <label for="input_face_image_file">Profile Image</label>
-            <input id="input_face_image_file" name="face_image_file" type="file" accept=".png, .jpg, .jpeg">
+            <label for="input_profile_image">Profile Image</label>
+            <input id="input_profile_image" name="profile_image" type="file" accept="image/*">
             <button>Submit</button>
         </form>
         <form action="index.php">
-            <input type="hidden" name="table" value="people">
+            <input type="hidden" name="display" value="people">
             <button>Cancel</button>
         </form>
     </div>

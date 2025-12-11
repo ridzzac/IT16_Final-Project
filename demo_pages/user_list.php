@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../api/get_user_list.php";
+require __DIR__ . "/../api/get_users_table.php";
 ?>
 
 <!DOCTYPE html>

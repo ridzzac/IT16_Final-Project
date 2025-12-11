@@ -17,7 +17,7 @@ __Post Body Optional Keys__: `description`, `sub_location`, `date_resolved`, `in
 
 ### Insert Involved Person
 Associates people to incidents.<br>
-__Post Body Required Keys__: `incident_id`, `person_id`, `involvement_type`<br>
+__Post Body Required Keys__: `incident_id`, `person_id`, `involvement_type_id`<br>
 __Post Body Optional Keys__: `description`
 
 ### Create User Account
@@ -26,7 +26,7 @@ __Post Body Required Keys__: `person_id`, `username`, `password`
 
 ## Read Operations (Select)
 ### People List
-__Path__: `/api/get_people_list.php`<br>
+__Path__: `/api/get_people_table.php`<br>
 __Variables__:
 - `$peopleList[]` - an indexed array for each person represented as an associative array:
 ```php
@@ -116,7 +116,7 @@ __Variables__:
 ```
 
 ### User List
-__Path__: `/api/get_user_list.php`,
+__Path__: `/api/get_users_table.php`,
 __Variables__:
 - `$userList[]` - and indexed array for each individual users.
 ```php

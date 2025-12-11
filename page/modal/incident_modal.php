@@ -59,7 +59,7 @@
             <button>Submit</button>            
         </form>
         <form action="index.php">
-            <input type="hidden" name="table" value="incidents">
+            <input type="hidden" name="display" value="incidents">
             <button>Cancel</button>
         </form>
     </div>

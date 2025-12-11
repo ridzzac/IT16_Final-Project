@@ -20,6 +20,7 @@ $query = "
     FROM
         person INNER JOIN gender ON person.gender_id = gender.gender_id
         INNER JOIN odiongan_barangay ON person.odiongan_barangay_id = odiongan_barangay.odiongan_barangay_id
+    ORDER BY person.person_id ASC
     LIMIT ?
 ";
 $stmt = $conn->prepare($query);
